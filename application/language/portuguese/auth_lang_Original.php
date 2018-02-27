@@ -140,3 +140,4 @@ $lang['reset_password_new_password_confirm_label']            = 'Confirme sua No
 $lang['reset_password_submit_btn']                            = 'Mudar';
 $lang['reset_password_validation_new_password_label']         = 'Senha Antiga';
 $lang['reset_password_validation_new_password_confirm_label'] = 'Confirme sua Nova Senha';
+

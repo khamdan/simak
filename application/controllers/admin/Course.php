@@ -51,7 +51,8 @@ class Course extends Admin_Controller {
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 		/* Validate form input */
-		$this->form_validation->set_rules('course_code', 'lang:create_group_validation_name_label', 'required|alpha_dash');
+		$this->form_validation->set_rules('course_code', 'lang:course_code', 'required|alpha_dash');
+		$this->form_validation->set_rules('course_name', 'lang:course_name', 'required|alpha_dash');
 
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -112,14 +113,15 @@ class Course extends Admin_Controller {
 		}
 
         /* Breadcrumbs */
-        $this->breadcrumbs->unshift(2, lang('menu_groups_edit'), 'admin/groups/edit');
+        $this->breadcrumbs->unshift(2, lang('menu_course_edit'), 'admin/course/edit');
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
         /* Variables */
-		$group = $this->ion_auth->group($id)->row();
+		$courses = $this->course->course_by_id($id);
 
 		/* Validate form input */
-        $this->form_validation->set_rules('group_name', $this->lang->line('edit_group_validation_name_label'), 'required|alpha_dash');
+        $this->form_validation->set_rules('course_code', $this->lang->line('course_code'), 'required|alpha_dash');
+        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required|alpha_dash');
 
 		if (isset($_POST) && ! empty($_POST))
 		{
@@ -139,40 +141,29 @@ class Course extends Admin_Controller {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('admin/groups', 'refresh');
+				redirect('admin/course', 'refresh');
 			}
 		}
 
-        $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-        $this->data['group']   = $group;
 
-		$readonly = $this->config->item('admin_group', 'ion_auth') === $group->name ? 'readonly' : '';
+		    $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-		$this->data['group_name'] = array(
-			'type'    => 'text',
-			'name'    => 'group_name',
-			'id'      => 'group_name',
-			'value'   => $this->form_validation->set_value('group_name', $group->name),
-            'class'   => 'form-control',
-			$readonly => $readonly
-		);
-		$this->data['group_description'] = array(
-			'type'  => 'text',
-			'name'  => 'group_description',
-			'id'    => 'group_description',
-			'value' => $this->form_validation->set_value('group_description', $group->description),
-            'class' => 'form-control'
-		);
-		$this->data['group_bgcolor'] = array(
-			'type'     => 'text',
-			'name'     => 'group_bgcolor',
-			'id'       => 'group_bgcolor',
-			'value'    => $this->form_validation->set_value('group_bgcolor', $group->bgcolor),
-			'data-src' => $group->bgcolor,
-            'class'    => 'form-control'
-		);
+			$this->data['course_code'] = array(
+				'name'  => 'course_code',
+				'id'    => 'course_code',
+				'type'  => 'text',
+                'class' => 'form-control',
+				'value' => $this->form_validation->set_value('course_code')
+			);
+			$this->data['course_name'] = array(
+				'name'  => 'course_name',
+				'id'    => 'course_name',
+				'type'  => 'text',
+                'class' => 'form-control',
+				'value' => $this->form_validation->set_value('course_name')
+			);
 
-        /* Load Template */
-        $this->template->admin_render('admin/groups/edit', $this->data);
+            /* Load Template */
+            $this->template->admin_render('admin/course/edit', $this->data);
 	}
 }

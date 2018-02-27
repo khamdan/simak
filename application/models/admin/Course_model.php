@@ -24,7 +24,7 @@ class Course_model extends CI_Model{
 
     public function get_ten_entries()
     {
-            $query = $this->db->get('course', 10);
+            $query = $this->db->get($this->table);
             return $query->result();
     }
 
@@ -64,29 +64,25 @@ class Course_model extends CI_Model{
 		return $group_id;
 	}
 
+
 	/**
-	 * @param string|array $events
+	 * group
+	 *
+	 * @param int|string|null $id
+	 *
+	 * @return static
+	 * @author Ben Edmunds
 	 */
-	public function trigger_events($events)
+	public function course_by_id($id = NULL)
 	{
-		if (is_array($events) && !empty($events))
-		{
-			foreach ($events as $event)
-			{
-				$this->trigger_events($event);
-			}
-		}
-		else
-		{
-			if (isset($this->_ion_hooks->$events) && !empty($this->_ion_hooks->$events))
-			{
-				foreach ($this->_ion_hooks->$events as $name => $hook)
-				{
-					$this->_call_hook($events, $name);
-				}
-			}
-		}
+		
+
+		if(isset($id)) {
+	     $query = $this->db->get_where($this->table, array('id' => $id));
+	    return $query->row();
+	    } 
 	}
+
 
 
 }

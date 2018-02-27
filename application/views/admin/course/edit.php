@@ -21,23 +21,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-edit_group')); ?>
                                         <div class="form-group">
-                                            <?php echo lang('groups_name', 'group_name', array('class' => 'col-sm-2 control-label')); ?>
+                                            <?php echo lang('course_code', 'course_code', array('class' => 'col-sm-2 control-label')); ?>
                                             <div class="col-sm-10">
-                                                <?php echo form_input($group_name);?>
+                                                <?php echo form_input($course_code);?>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <?php echo lang('groups_description', 'description', array('class' => 'col-sm-2 control-label')); ?>
+                                            <?php echo lang('course_name', 'course_name', array('class' => 'col-sm-2 control-label')); ?>
                                             <div class="col-sm-10">
-                                                <?php echo form_input($group_description); ?>
+                                                <?php echo form_input($course_name);?>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <?php echo lang('groups_color', 'bgcolor', array('class' => 'col-sm-2 control-label')); ?>
-                                            <div class="col-sm-3">
-                                                <?php echo form_input($group_bgcolor); ?>
-                                            </div>
-                                        </div>
+                                       
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
                                                 <div class="btn-group">
