@@ -59,7 +59,7 @@ class Course extends Admin_Controller {
 			$new_course_id = $this->m_course->create($this->input->post('course_code'), $this->input->post('course_name'));
 			if ($new_course_id)
 			{
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->session->set_flashdata('message', $this->lang->line('course_add_saved'));
 				redirect('admin/course');
 					//$this->index();
 			}
@@ -180,11 +180,11 @@ class Course extends Admin_Controller {
 		{
 			if ($this->form_validation->run() == TRUE)
 			{
-				$course_update = $this->m_course->delete($id);
+				$course_deleted = $this->m_course->delete($id);
 
-				if ($course_update)
+				if ($course_deleted)
 				{
-					$this->session->set_flashdata('message', $this->lang->line('course_edit_saved'));
+					$this->session->set_flashdata('message', $this->lang->line('course_deleted'));
 
                    
 				}

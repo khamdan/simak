@@ -18,6 +18,8 @@ $lang['course_delete']  = 'Delete';
 $lang['course_add']      = 'Add new';
 
 
+$lang['course_add_saved']      = 'Add Course Saved';
 $lang['course_edit_saved']      = 'Edit Saved';
+$lang['course_deleted']      = 'Course Deleted';
 
 

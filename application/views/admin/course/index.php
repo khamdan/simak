@@ -18,6 +18,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
     
                                 <div class="box-body">
+                                     <?php if ($this->session->flashdata('message')): ?>
+                                    <div class="alert alert-success alert-dismissible ">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                           <?php echo $this->session->flashdata('message'); ?>
+                                      </div>
+                                  <?php endif;?>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
