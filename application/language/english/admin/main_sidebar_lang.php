@@ -43,6 +43,8 @@ $lang['menu_search'] = 'Search';
 /* ****** */$lang['menu_course']                = 'Course';
 /* ****** */$lang['menu_course_create']         = 'Create';
 /* ****** */$lang['menu_course_edit']           = 'Edit';
+/* ****** */$lang['menu_course_delete']         = 'Delete';
+
 
 
 /* * */$lang['menu_webapp']                     = 'Web application';

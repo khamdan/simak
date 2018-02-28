@@ -14,4 +14,10 @@ $lang['course_code']        = 'Course Code';
 $lang['course_name'] = 'Course Name';
 $lang['course_action']      = 'Action';
 $lang['course_edit']  = 'Edit';
+$lang['course_delete']  = 'Delete';
 $lang['course_add']      = 'Add new';
+
+
+$lang['course_edit_saved']      = 'Edit Saved';
+
+

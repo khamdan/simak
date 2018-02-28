@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <tr>
                                                 <th><?php echo lang('course_code');?></th>
                                                 <th><?php echo lang('course_name');?></th>
-                                                <th><?php echo lang('course_action');?></th>
+                                                <th colspan="2"><?php echo lang('course_action');?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -32,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <td><?php echo htmlspecialchars($values->course_code, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($values->course_name, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo anchor("admin/course/edit/".$values->id, lang('course_edit')); ?></td>
+                                                <td><?php echo anchor("admin/course/delete/".$values->id, lang('course_delete')); ?></td>
                                             </tr>
 <?php endforeach;?>
                                         </tbody>

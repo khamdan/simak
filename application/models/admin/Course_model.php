@@ -65,6 +65,53 @@ class Course_model extends CI_Model{
 	}
 
 
+		/**
+	 * update_group
+	 *
+	 * @param int|string|bool $group_id
+	 * @param string|bool     $group_name
+	 * @param string|array    $additional_data IMPORTANT! This was string type $description; strings are still allowed
+	 *                                         to maintain backward compatibility. New projects should pass an array of
+	 *                                         data instead.
+	 *
+	 * @return bool
+	 * @author aditya menon
+	 */
+	public function update($id,$course_code = FALSE, $course_name = '', $additional_data = array())
+	{
+		if (empty($course_code))
+		{
+			return FALSE;
+		}
+
+		$data = array();
+
+		if (!empty($course_name))
+		{
+			// we are changing the name, so do some checks
+
+			// bail if the group name already exists
+			$existing_course = $this->db->get_where($this->table, array('id' => $id))->row();
+			if (isset($existing_course->id) && $existing_course->id != $id)
+			{
+				$this->set_error('group_already_exists');
+				return FALSE;
+			}
+
+			$data['course_code'] = $course_code;
+			$data['course_name'] = $course_name;
+		}
+
+
+
+		$this->db->update($this->table, $data, array('id' => $id));
+
+		$this->ion_auth->set_message('group_update_successful');
+
+		return TRUE;
+	}
+
+
 	/**
 	 * group
 	 *
@@ -82,6 +129,22 @@ class Course_model extends CI_Model{
 	    return $query->row();
 	    } 
 	}
+
+	public function delete($id = NULL)
+	{
+		
+
+		if(isset($id)) {
+	     $query = $this->db->delete($this->table, array('id' => $id));
+	    return $query;
+	    } 
+	}
+
+			
+
+
+
+
 
 
 

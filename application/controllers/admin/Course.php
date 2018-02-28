@@ -8,7 +8,7 @@ class Course extends Admin_Controller {
         parent::__construct();
 
         $this->lang->load('admin/course');
-        $this->load->model('admin/Course_model', 'course');
+        $this->load->model('admin/Course_model', 'm_course');
 
         /* Title Page :: Common */
         $this->page_title->push(lang('menu_course'));
@@ -30,7 +30,7 @@ class Course extends Admin_Controller {
             /* Breadcrumbs */
             $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
-            $this->data['courses'] = $this->course->get_ten_entries();
+            $this->data['courses'] = $this->m_course->get_ten_entries();
             //$this->data['groups'] = $this->ion_auth->groups()->result();
 
             /* Load Template */
@@ -56,11 +56,12 @@ class Course extends Admin_Controller {
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			$new_group_id = $this->course->create($this->input->post('course_code'), $this->input->post('course_name'));
-			if ($new_group_id)
+			$new_course_id = $this->m_course->create($this->input->post('course_code'), $this->input->post('course_name'));
+			if ($new_course_id)
 			{
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('admin/course', 'refresh');
+				redirect('admin/course');
+					//$this->index();
 			}
 		}
 		else
@@ -88,21 +89,7 @@ class Course extends Admin_Controller {
 	}
 
 
-	public function delete()
-	{
-        if ( ! $this->ion_auth->logged_in())
-        {
-            redirect('auth/login', 'refresh');
-        }
-        elseif ( ! $this->ion_auth->is_admin())
-		{
-            return show_error('You must be an administrator to view this page.');
-        }
-        else
-        {
-            $this->load->view('admin/groups/delete');
-        }
-	}
+
 
 
 	public function edit($id)
@@ -117,31 +104,32 @@ class Course extends Admin_Controller {
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
         /* Variables */
-		$courses = $this->course->course_by_id($id);
+
+		$courses = $this->m_course->course_by_id($id);
 
 		/* Validate form input */
         $this->form_validation->set_rules('course_code', $this->lang->line('course_code'), 'required|alpha_dash');
-        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required|alpha_dash');
+        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required');
 
 		if (isset($_POST) && ! empty($_POST))
 		{
 			if ($this->form_validation->run() == TRUE)
 			{
-				$group_update = $this->ion_auth->update_group($id, $_POST['group_name'], $_POST['group_description']);
+				$course_update = $this->m_course->update($id, $_POST['course_code'], $_POST['course_name']);
 
-				if ($group_update)
+				if ($course_update)
 				{
-					$this->session->set_flashdata('message', $this->lang->line('edit_group_saved'));
+					$this->session->set_flashdata('message', $this->lang->line('course_edit_saved'));
 
-                    /* IN TEST */
-                    $this->db->update('groups', array('bgcolor' => $_POST['group_bgcolor']), 'id = '.$id);
+                   
 				}
 				else
 				{
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('admin/course', 'refresh');
+				redirect('admin/course');
+				//$this->index();
 			}
 		}
 
@@ -153,17 +141,84 @@ class Course extends Admin_Controller {
 				'id'    => 'course_code',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_code')
+				'value' => $this->form_validation->set_value('course_code',$courses->course_code),
+				'readonly' => 'readonly'
 			);
 			$this->data['course_name'] = array(
 				'name'  => 'course_name',
 				'id'    => 'course_name',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_name')
+				'value' => $this->form_validation->set_value('course_name',$courses->course_name)
 			);
 
             /* Load Template */
             $this->template->admin_render('admin/course/edit', $this->data);
+	}
+
+
+	public function delete($id)
+	{
+		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin() OR ! $id OR empty($id))
+		{
+			redirect('auth', 'refresh');
+		}
+
+        /* Breadcrumbs */
+        $this->breadcrumbs->unshift(2, lang('menu_course_delete'), 'admin/course/delete');
+        $this->data['breadcrumb'] = $this->breadcrumbs->show();
+
+        /* Variables */
+
+		$courses = $this->m_course->course_by_id($id);
+
+		/* Validate form input */
+        $this->form_validation->set_rules('course_code', $this->lang->line('course_code'), 'required|alpha_dash');
+        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required');
+
+		if (isset($_POST) && ! empty($_POST))
+		{
+			if ($this->form_validation->run() == TRUE)
+			{
+				$course_update = $this->m_course->delete($id);
+
+				if ($course_update)
+				{
+					$this->session->set_flashdata('message', $this->lang->line('course_edit_saved'));
+
+                   
+				}
+				else
+				{
+					$this->session->set_flashdata('message', $this->ion_auth->errors());
+				}
+
+				redirect('admin/course');
+				//$this->index();
+			}
+		}
+
+
+		    $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+			$this->data['course_code'] = array(
+				'name'  => 'course_code',
+				'id'    => 'course_code',
+				'type'  => 'text',
+                'class' => 'form-control',
+				'value' => $this->form_validation->set_value('course_code',$courses->course_code),
+				'readonly' => 'readonly'
+			);
+			$this->data['course_name'] = array(
+				'name'  => 'course_name',
+				'id'    => 'course_name',
+				'type'  => 'text',
+                'class' => 'form-control',
+				'value' => $this->form_validation->set_value('course_name',$courses->course_name),
+				'readonly' => 'readonly'
+			);
+
+            /* Load Template */
+            $this->template->admin_render('admin/course/delete', $this->data);
 	}
 }
