@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
-                    <b><?php echo lang('footer_version'); ?></b> Development
+                    <b><?php echo lang('footer_version'); echo " ".CI_VERSION; ?></b> 
                 </div>
                 <strong><?php echo lang('footer_copyright'); ?> &copy; 2011-<?php echo date('Y'); ?> <a href="http://khamdan.com" target="_blank">Zen Studio</a>  </strong> <?php echo lang('footer_all_rights_reserved'); ?>.
             </footer>

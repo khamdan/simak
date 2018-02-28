@@ -31,8 +31,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <tr>
                                                 <td><?php echo htmlspecialchars($values->course_code, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($values->course_name, ENT_QUOTES, 'UTF-8'); ?></td>
-                                                <td><?php echo anchor("admin/course/edit/".$values->id, lang('course_edit')); ?></td>
-                                                <td><?php echo anchor("admin/course/delete/".$values->id, lang('course_delete')); ?></td>
+                                                <td>
+                                                 <div class="btn-group">
+                                                     
+                                                     <?php echo anchor("admin/course/edit/".$values->id, 
+                                                                        "<i class='fa fa-pencil'></i> ".lang('course_edit'), 
+                                                                        array('class' => 'btn btn-primary btn-flat',
+                                                                               'title'=>lang('course_edit'))); ?>
+                                                    <?php echo anchor("admin/course/delete/".$values->id, 
+                                                                        "<i class='fa fa-trash'></i> ".lang('course_delete'), 
+                                                                        array('class' => 'btn btn-danger btn-flat',
+                                                                               'title'=>lang('course_delete'))); ?>
+
+                                                </td>
+                                                </div>
                                             </tr>
 <?php endforeach;?>
                                         </tbody>
