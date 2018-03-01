@@ -63,6 +63,10 @@ class Course extends Admin_Controller {
 				redirect('admin/course');
 					//$this->index();
 			}
+			else{
+				$this->session->set_flashdata('message', $this->lang->line('course_error'));
+				redirect('admin/course');
+			}
 		}
 		else
 		{
