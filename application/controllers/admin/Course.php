@@ -11,7 +11,7 @@ class Course extends Admin_Controller {
         $this->load->model('admin/Course_model', 'm_course');
 
         /* Title Page :: Common */
-        $this->page_title->push(lang('menu_course'));
+		$this->page_title->push(lang('menu_course'));
         $this->data['pagetitle'] = $this->page_title->show();
 
         /* Breadcrumbs :: Common */
