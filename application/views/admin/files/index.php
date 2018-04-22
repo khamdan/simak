@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php echo $error;?>
 
-<?php echo form_open_multipart('admin/files/do_upload');?>
+<?php echo form_open_multipart('files/do_upload');?>
 
 <input type="file" name="userfile" size="20" />
 

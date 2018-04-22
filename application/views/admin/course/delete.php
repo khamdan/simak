@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="col-sm-offset-2 col-sm-10">
                                                 <div class="btn-group">
                                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-danger btn-flat', 'content' => lang('actions_delete'))); ?>
-                                                    <?php echo anchor('admin/course', lang('actions_cancel'), array('class' => 'btn btn-default btn-flat')); ?>
+                                                    <?php echo anchor('course', lang('actions_cancel'), array('class' => 'btn btn-default btn-flat')); ?>
                                                 </div>
                                             </div>
                                         </div>

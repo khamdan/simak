@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-12">
                              <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title"><?php echo anchor('admin/course/create', '<i class="fa fa-plus"></i> '. lang('course_add'), array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>
+                                    <h3 class="box-title"><?php echo anchor('course/create', '<i class="fa fa-plus"></i> '. lang('course_add'), array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>
                                 </div>
     
                                 <div class="box-body">
@@ -40,11 +40,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <td>
                                                  <div class="btn-group">
                                                      
-                                                     <?php echo anchor("admin/course/edit/".$values->id, 
+                                                     <?php echo anchor("course/edit/".$values->id, 
                                                                         "<i class='fa fa-pencil'></i> ".lang('course_edit'), 
                                                                         array('class' => 'btn btn-primary btn-flat',
                                                                                'title'=>lang('course_edit'))); ?>
-                                                    <?php echo anchor("admin/course/delete/".$values->id, 
+                                                    <?php echo anchor("course/delete/".$values->id, 
                                                                         "<i class='fa fa-trash'></i> ".lang('course_delete'), 
                                                                         array('class' => 'btn btn-danger btn-flat',
                                                                                'title'=>lang('course_delete'))); ?>

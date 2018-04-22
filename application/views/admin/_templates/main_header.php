@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
             <header class="main-header">
-                <a href="<?php echo site_url('admin/dashboard'); ?>" class="logo">
+                <a href="<?php echo site_url('dashboard'); ?>" class="logo">
                     <span class="logo-mini"><b>A </b><?php echo $title_mini; ?></span>
                     <span class="logo-lg"><b>Admin </b><?php echo $title_lg; ?></span>
                 </a>
@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </li>
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="<?php echo site_url('admin/users/profile/'.$user_login['id']); ?>" class="btn btn-default btn-flat"><?php echo lang('header_profile'); ?></a>
+                                            <a href="<?php echo site_url('users/profile/'.$user_login['id']); ?>" class="btn btn-default btn-flat"><?php echo lang('header_profile'); ?></a>
                                         </div>
                                         <div class="pull-right">
                                             <a href="<?php echo site_url('auth/logout/admin'); ?>" class="btn btn-default btn-flat"><?php echo lang('header_sign_out'); ?></a>

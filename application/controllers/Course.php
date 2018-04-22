@@ -60,12 +60,12 @@ class Course extends Admin_Controller {
 			if ($new_course_id)
 			{
 				$this->session->set_flashdata('message', $this->lang->line('course_add_saved'));
-				redirect('admin/course');
+				redirect('course');
 					//$this->index();
 			}
 			else{
 				$this->session->set_flashdata('message', $this->lang->line('course_error'));
-				redirect('admin/course');
+				redirect('course');
 			}
 		}
 		else
@@ -132,7 +132,7 @@ class Course extends Admin_Controller {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('admin/course');
+				redirect('course');
 				//$this->index();
 			}
 		}
@@ -197,7 +197,7 @@ class Course extends Admin_Controller {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('admin/course');
+				redirect('course');
 				//$this->index();
 			}
 		}
