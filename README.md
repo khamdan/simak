@@ -1,2 +1,0 @@
-# simak
-Sistem Informasi Akademik
