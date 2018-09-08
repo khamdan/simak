@@ -12,6 +12,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
+                        <pre>
+                            <?php
+                            print_r($courses);  
+                            ?>
+                        </pre>
                              <div class="box">
                                 <div class="box-header with-border">
                                     <h3 class="box-title"><?php echo anchor('course/create', '<i class="fa fa-plus"></i> '. lang('course_add'), array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>
