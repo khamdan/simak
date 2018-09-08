@@ -8,7 +8,7 @@ CodeIgniter 3.x with AdminLTE 2.3.x
 3. Open the `application/config/common/dp_config.php` file with a text editor and set your base URL:
 ```
 // Fill in the file of your project here when you develop locally.
-$host_dev = 'CI-AdminLTE';
+$host_dev = 'CI-AdminLTE'; 
 
 // Fill in the domain name here when your project is online.
 // Example : www.johndoe.com
