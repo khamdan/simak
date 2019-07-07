@@ -6,11 +6,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Bcrypt $bcrypt The Bcrypt library
  * @property Ion_auth $ion_auth The Ion_auth library
  */
-class Course_model extends CI_Model{
+class Person_model extends CI_Model{
 	public $title;
     public $content;
     public $date;
-    public 		$table='course';
+    public 		$table='person';
 
 
     public function __construct()
@@ -28,25 +28,25 @@ class Course_model extends CI_Model{
             return $query->result();
     }
 
-    public function create($course_code = FALSE, $course_name = '', $additional_data = array())
+    public function create($person_code = FALSE, $person_name = '', $additional_data = array())
 	{
 		
 		// bail if the group name was not passed
-		if(!$course_code)
+		if(!$person_code)
 		{
 			$this->set_error('group_name_required');
 			return FALSE;
 		}
 
 		// bail if the group name already exists
-		$existing_group = $this->db->get_where($this->table, array('course_code' => $course_code))->num_rows();
+		$existing_group = $this->db->get_where($this->table, array('person_code' => $person_code))->num_rows();
 		if($existing_group !== 0)
 		{
 			$this->ion_auth->set_error('group_already_exists');
 			return FALSE;
 		}
 
-		$data = array('course_code'=>$course_code,'course_name'=>$course_name);
+		$data = array('person_code'=>$person_code,'person_name'=>$person_name);
 
 		// filter out any data passed that doesnt have a matching column in the groups table
 		// and merge the set group data and the additional data
@@ -77,16 +77,16 @@ class Course_model extends CI_Model{
 	 * @return bool
 	 * @author aditya menon
 	 */
-	public function update($id,$course_code = FALSE, $course_name = '', $additional_data = array())
+	public function update($id,$person_code = FALSE, $person_name = '', $additional_data = array())
 	{
-		if (empty($course_code))
+		if (empty($person_code))
 		{
 			return FALSE;
 		}
 
 		$data = array();
 
-		if (!empty($course_name))
+		if (!empty($person_name))
 		{
 			// we are changing the name, so do some checks
 
@@ -98,8 +98,8 @@ class Course_model extends CI_Model{
 				return FALSE;
 			}
 
-			$data['course_code'] = $course_code;
-			$data['course_name'] = $course_name;
+			$data['person_code'] = $person_code;
+			$data['person_name'] = $person_name;
 		}
 
 

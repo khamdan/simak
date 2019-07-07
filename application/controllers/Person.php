@@ -1,21 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Course extends Admin_Controller {
+class Person extends Admin_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->lang->load('admin/course');
-        $this->load->model('admin/Course_model', 'm_course');
+        $this->lang->load('admin/person');
+        $this->load->model('admin/Person_model', 'm_person');
 
         /* Title Page :: Common */
-		$this->page_title->push(lang('menu_course'));
+		$this->page_title->push(lang('menu_person'));
         $this->data['pagetitle'] = $this->page_title->show();
 
         /* Breadcrumbs :: Common */
-        $this->breadcrumbs->unshift(1, lang('menu_course'), 'admin/course');
+        $this->breadcrumbs->unshift(1, lang('menu_person'), 'admin/person');
     }
 
 
@@ -30,11 +30,11 @@ class Course extends Admin_Controller {
             /* Breadcrumbs */
             $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
-            $this->data['courses'] = $this->m_course->get_ten_entries();
+            $this->data['courses'] = $this->m_person->get_ten_entries();
             //$this->data['groups'] = $this->ion_auth->groups()->result();
 
             /* Load Template */
-            $this->template->admin_render('admin/course/index', $this->data);
+            $this->template->admin_render('admin/person/index', $this->data);
         }
     }
 
@@ -47,48 +47,48 @@ class Course extends Admin_Controller {
 		}
 
         /* Breadcrumbs */
-        $this->breadcrumbs->unshift(2, lang('menu_course_create'), 'admin/course/create');
+        $this->breadcrumbs->unshift(2, lang('menu_course_create'), 'admin/person/create');
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 		/* Validate form input */
-		$this->form_validation->set_rules('course_code', 'lang:course_code', 'required|alpha_dash');
-		$this->form_validation->set_rules('course_name', 'lang:course_name', 'required|alpha_dash');
+		$this->form_validation->set_rules('person_code', 'lang:person_code', 'required|alpha_dash');
+		$this->form_validation->set_rules('person_name', 'lang:person_name', 'required|alpha_dash');
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			$new_course_id = $this->m_course->create($this->input->post('course_code'), $this->input->post('course_name'));
+			$new_course_id = $this->m_person->create($this->input->post('person_code'), $this->input->post('person_name'));
 			if ($new_course_id)
 			{
-				$this->session->set_flashdata('message', $this->lang->line('course_add_saved'));
-				redirect('course');
+				$this->session->set_flashdata('message', $this->lang->line('person_add_saved'));
+				redirect('person');
 					//$this->index();
 			}
 			else{
-				$this->session->set_flashdata('message', $this->lang->line('course_error'));
-				redirect('course');
+				$this->session->set_flashdata('message', $this->lang->line('person_error'));
+				redirect('person');
 			}
 		}
 		else
 		{
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-			$this->data['course_code'] = array(
-				'name'  => 'course_code',
-				'id'    => 'course_code',
+			$this->data['person_code'] = array(
+				'name'  => 'person_code',
+				'id'    => 'person_code',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_code')
+				'value' => $this->form_validation->set_value('person_code')
 			);
-			$this->data['course_name'] = array(
-				'name'  => 'course_name',
-				'id'    => 'course_name',
+			$this->data['person_name'] = array(
+				'name'  => 'person_name',
+				'id'    => 'person_name',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_name')
+				'value' => $this->form_validation->set_value('person_name')
 			);
 
             /* Load Template */
-            $this->template->admin_render('admin/course/create', $this->data);
+            $this->template->admin_render('admin/person/create', $this->data);
 		}
 	}
 
@@ -104,22 +104,22 @@ class Course extends Admin_Controller {
 		}
 
         /* Breadcrumbs */
-        $this->breadcrumbs->unshift(2, lang('menu_course_edit'), 'admin/course/edit');
+        $this->breadcrumbs->unshift(2, lang('menu_person_edit'), 'admin/person/edit');
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
         /* Variables */
 
-		$courses = $this->m_course->course_by_id($id);
+		$courses = $this->m_person->course_by_id($id);
 
 		/* Validate form input */
-        $this->form_validation->set_rules('course_code', $this->lang->line('course_code'), 'required|alpha_dash');
-        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required');
+        $this->form_validation->set_rules('person_code', $this->lang->line('person_code'), 'required|alpha_dash');
+        $this->form_validation->set_rules('person_name', $this->lang->line('person_name'), 'required');
 
 		if (isset($_POST) && ! empty($_POST))
 		{
 			if ($this->form_validation->run() == TRUE)
 			{
-				$course_update = $this->m_course->update($id, $_POST['course_code'], $_POST['course_name']);
+				$course_update = $this->m_person->update($id, $_POST['person_code'], $_POST['person_name']);
 
 				if ($course_update)
 				{
@@ -132,7 +132,7 @@ class Course extends Admin_Controller {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('course');
+				redirect('person');
 				//$this->index();
 			}
 		}
@@ -140,24 +140,24 @@ class Course extends Admin_Controller {
 
 		    $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-			$this->data['course_code'] = array(
-				'name'  => 'course_code',
-				'id'    => 'course_code',
+			$this->data['person_code'] = array(
+				'name'  => 'person_code',
+				'id'    => 'person_code',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_code',$courses->course_code),
+				'value' => $this->form_validation->set_value('person_code',$courses->person_code),
 				'readonly' => 'readonly'
 			);
-			$this->data['course_name'] = array(
-				'name'  => 'course_name',
-				'id'    => 'course_name',
+			$this->data['person_name'] = array(
+				'name'  => 'person_name',
+				'id'    => 'person_name',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_name',$courses->course_name)
+				'value' => $this->form_validation->set_value('person_name',$courses->person_name)
 			);
 
             /* Load Template */
-            $this->template->admin_render('admin/course/edit', $this->data);
+            $this->template->admin_render('admin/person/edit', $this->data);
 	}
 
 
@@ -169,22 +169,22 @@ class Course extends Admin_Controller {
 		}
 
         /* Breadcrumbs */
-        $this->breadcrumbs->unshift(2, lang('menu_course_delete'), 'admin/course/delete');
+        $this->breadcrumbs->unshift(2, lang('menu_person_delete'), 'admin/person/delete');
         $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
         /* Variables */
 
-		$courses = $this->m_course->course_by_id($id);
+		$courses = $this->m_person->course_by_id($id);
 
 		/* Validate form input */
-        $this->form_validation->set_rules('course_code', $this->lang->line('course_code'), 'required|alpha_dash');
-        $this->form_validation->set_rules('course_name', $this->lang->line('course_name'), 'required');
+        $this->form_validation->set_rules('person_code', $this->lang->line('person_code'), 'required|alpha_dash');
+        $this->form_validation->set_rules('person_name', $this->lang->line('person_name'), 'required');
 
 		if (isset($_POST) && ! empty($_POST))
 		{
 			if ($this->form_validation->run() == TRUE)
 			{
-				$course_deleted = $this->m_course->delete($id);
+				$course_deleted = $this->m_person->delete($id);
 
 				if ($course_deleted)
 				{
@@ -197,7 +197,7 @@ class Course extends Admin_Controller {
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
 
-				redirect('course');
+				redirect('person');
 				//$this->index();
 			}
 		}
@@ -205,24 +205,24 @@ class Course extends Admin_Controller {
 
 		    $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-			$this->data['course_code'] = array(
-				'name'  => 'course_code',
-				'id'    => 'course_code',
+			$this->data['person_code'] = array(
+				'name'  => 'person_code',
+				'id'    => 'person_code',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_code',$courses->course_code),
+				'value' => $this->form_validation->set_value('person_code',$courses->person_code),
 				'readonly' => 'readonly'
 			);
-			$this->data['course_name'] = array(
-				'name'  => 'course_name',
-				'id'    => 'course_name',
+			$this->data['person_name'] = array(
+				'name'  => 'person_name',
+				'id'    => 'person_name',
 				'type'  => 'text',
                 'class' => 'form-control',
-				'value' => $this->form_validation->set_value('course_name',$courses->course_name),
+				'value' => $this->form_validation->set_value('person_name',$courses->person_name),
 				'readonly' => 'readonly'
 			);
 
             /* Load Template */
-            $this->template->admin_render('admin/course/delete', $this->data);
+            $this->template->admin_render('admin/person/delete', $this->data);
 	}
 }

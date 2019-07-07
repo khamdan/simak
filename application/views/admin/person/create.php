@@ -21,15 +21,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                     <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_group')); ?>
                                         <div class="form-group">
-                                            <?php echo lang('course_code', 'group_name', array('class' => 'col-sm-2 control-label')); ?>
+                                            <?php echo lang('person_code', 'group_name', array('class' => 'col-sm-2 control-label')); ?>
                                             <div class="col-sm-10">
-                                                <?php echo form_input($course_code);?>
+                                                <?php echo form_input($person_code);?>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <?php echo lang('course_name', 'description', array('class' => 'col-sm-2 control-label')); ?>
+                                            <?php echo lang('person_name', 'description', array('class' => 'col-sm-2 control-label')); ?>
                                             <div class="col-sm-10">
-                                                <?php echo form_input($course_name);?>
+                                                <?php echo form_input($person_name);?>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <div class="btn-group">
                                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => lang('actions_submit'))); ?>
                                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => lang('actions_reset'))); ?>
-                                                    <?php echo anchor('course', lang('actions_cancel'), array('class' => 'btn btn-default btn-flat')); ?>
+                                                    <?php echo anchor('person', lang('actions_cancel'), array('class' => 'btn btn-default btn-flat')); ?>
                                                 </div>
                                             </div>
                                         </div>

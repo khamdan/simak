@@ -39,11 +39,11 @@ $lang['menu_search'] = 'Search';
 /* ****** */$lang['menu_files']                 = 'Files';
 /* ****** */$lang['menu_database_utility']      = 'Database utility';
 
-/* * */$lang['menu_academic']                   = 'Academic';
-/* ****** */$lang['menu_course']                = 'Course';
-/* ****** */$lang['menu_course_create']         = 'Create';
-/* ****** */$lang['menu_course_edit']           = 'Edit';
-/* ****** */$lang['menu_course_delete']         = 'Delete';
+/* * */$lang['menu_academic']                   = 'Master';
+/* ****** */$lang['menu_person']                = 'Person';
+/* ****** */$lang['menu_person_create']         = 'Create';
+/* ****** */$lang['menu_person_edit']           = 'Edit';
+/* ****** */$lang['menu_person_delete']         = 'Delete';
 
 
 

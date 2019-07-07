@@ -78,9 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </a>
                         </li>
                         <li class="header text-uppercase"><?php echo lang('menu_academic'); ?></li>
-                        <li class="<?=active_link_controller('course')?>">
-                            <a href="<?php echo site_url('course'); ?>">
-                                <i class="fa fa-graduation-cap"></i> <span><?php echo lang('menu_course'); ?></span>
+                        <li class="<?=active_link_controller('person')?>">
+                            <a href="<?php echo site_url('person'); ?>">
+                                <i class="fa fa-graduation-cap"></i> <span><?php echo lang('menu_person'); ?></span>
                             </a>
                         </li>
 
